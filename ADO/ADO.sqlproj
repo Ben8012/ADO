@@ -75,6 +75,8 @@
     <Build Include="Tables\Student.sql" />
     <Build Include="Types\T_Student.sql" />
     <Build Include="Views\V_Student.sql" />
+    <Build Include="Scripts\CR_Student.sql" />
+    <Build Include="Scripts\TEST_EX.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ADO.publish.xml" />

@@ -1,4 +1,4 @@
-USE ADO
+
 
 -- DELETE Student WHERE Id = 1; -- test tirgger
 
@@ -13,3 +13,5 @@ USE ADO
 -- EXEC dbo.AddSection 200,'Ma section test' -- test procedure AddSection
 
 -- Select * From V_Student -- test vue
+
+

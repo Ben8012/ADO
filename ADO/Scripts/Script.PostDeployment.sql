@@ -1,4 +1,4 @@
-﻿use ADO
+﻿--use ADO
 
 --INSERT INTO section VALUES (1010, N'Informatique de Gestion');
 --INSERT INTO section VALUES (1020, N'Comptabilité');

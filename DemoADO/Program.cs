@@ -102,23 +102,67 @@ using (SqlConnection c = new SqlConnection())
 
     //}
 
+    //Console.WriteLine();
+    //Console.WriteLine("Ex 4 : Instanciez un objet de type « Student » contenant vos informations, Insérez votre objet en base de données en récupérant son « ID » au passage");
+    //using (SqlCommand cmd = c.CreateCommand())
+    //{
+    //    Student student = new Student()
+    //    {
+    //        FirstName = "Benjamin",
+    //        LastName = "Sterckx",
+    //        BirthDate = new DateTime(1980, 12, 10),
+    //        YearResult = 20,
+    //        SectionId = 1010
+    //    };
+       
+
+    //    string sqlFormattedDate = student.BirthDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+    //    //Console.WriteLine(sqlFormattedDate);
+    //    cmd.CommandText = $"INSERT INTO Student(FirstName, LastName, BirthDate, YearResult , SectionId ) output inserted.*  Values('{student.FirstName}','{student.LastName}','{sqlFormattedDate}',{student.YearResult},{student.SectionId}) ";
+    //    c.Open();
+    //    //int rows = cmd.ExecuteNonQuery();
+    //    //int student.id = (int)cmd.ExecuteScalar();
+    //    //Console.WriteLine($"L'id inseré est : {id}");
+
+    //    using (SqlDataReader reader = cmd.ExecuteReader())
+    //    {
+    //        if (reader.Read())
+    //        {
+    //            int insertedId = (int)reader["Id"];
+    //            string insertedLastName = (string)reader["LastName"];
+    //            string insertedFirstName = (string)reader["FirstName"];
+    //            Console.WriteLine($"{insertedFirstName} {insertedLastName} a été inseré dans la table Student");
+    //            Console.WriteLine($"L'id inseré est : {insertedId}");
+    //        }
+           
+    //    }
+    //    c.Close();
+    //}
+
+
     Console.WriteLine();
-    Console.WriteLine("Ex 4 : Instanciez un objet de type « Student » contenant vos informations, Insérez votre objet en base de données en récupérant son « ID » au passage");
+    Console.WriteLine("Ex 5 : Instanciez un objet de type « Student » contenant les informations de votre voisin(e), Insérez votre objet en base de données en utilisant les requêtes paramétrées");
     using (SqlCommand cmd = c.CreateCommand())
     {
         Student student = new Student()
         {
-            FirstName = "Benjamin",
-            LastName = "Sterckx",
-            BirthDate = new DateTime(1980, 12, 10),
-            YearResult = 20,
+            FirstName = "Corine",
+            LastName = "Latour",
+            BirthDate = new DateTime(1982, 8, 21),
+            YearResult = 15,
             SectionId = 1010
         };
-       
+
 
         string sqlFormattedDate = student.BirthDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
         //Console.WriteLine(sqlFormattedDate);
-        cmd.CommandText = $"INSERT INTO Student(FirstName, LastName, BirthDate, YearResult , SectionId ) output inserted.*  Values('{student.FirstName}','{student.LastName}','{sqlFormattedDate}',{student.YearResult},{student.SectionId}) ";
+        cmd.CommandText = $"INSERT INTO Student(FirstName, LastName, BirthDate, YearResult , SectionId ) output inserted.*  Values(@prenom,@nom,@anneeNaiss,@resultatAnnee,@sectionId) ";
+        cmd.Parameters.AddWithValue("prenom", student.FirstName);
+        cmd.Parameters.AddWithValue("nom", student.LastName);
+        cmd.Parameters.AddWithValue("anneeNaiss", sqlFormattedDate);
+        cmd.Parameters.AddWithValue("resultatAnnee", student.YearResult);
+        cmd.Parameters.AddWithValue("sectionId", student.SectionId);
+
         c.Open();
         //int rows = cmd.ExecuteNonQuery();
         //int student.id = (int)cmd.ExecuteScalar();
@@ -134,7 +178,7 @@ using (SqlConnection c = new SqlConnection())
                 Console.WriteLine($"{insertedFirstName} {insertedLastName} a été inseré dans la table Student");
                 Console.WriteLine($"L'id inseré est : {insertedId}");
             }
-           
+
         }
         c.Close();
     }
