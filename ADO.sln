@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ADO", "ADO\ADO.sqlproj", "{4383BF8C-C010-4898-8F24-DBF508CD1A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoADO", "DemoADO\DemoADO.csproj", "{28E6B353-81D2-4CA8-B005-2CD73360FEDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoADO", "DemoADO\DemoADO.csproj", "{28E6B353-81D2-4CA8-B005-2CD73360FEDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBConnection", "DBConnection\DBConnection.csproj", "{20D238A9-6A15-4021-991F-9E404924BDE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{28E6B353-81D2-4CA8-B005-2CD73360FEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28E6B353-81D2-4CA8-B005-2CD73360FEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28E6B353-81D2-4CA8-B005-2CD73360FEDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20D238A9-6A15-4021-991F-9E404924BDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D238A9-6A15-4021-991F-9E404924BDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D238A9-6A15-4021-991F-9E404924BDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D238A9-6A15-4021-991F-9E404924BDE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

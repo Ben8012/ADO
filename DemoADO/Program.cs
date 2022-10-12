@@ -10,6 +10,7 @@
 using DemoADO.Models;
 using System.Data;
 using System.Data.SqlClient;
+using DBConnection;
 
 using (SqlConnection c = new SqlConnection())
 {
@@ -85,9 +86,9 @@ using (SqlConnection c = new SqlConnection())
     //        {
     //            Console.WriteLine($"{(int)dataRow["Id"]} {(string)dataRow["SectionName"]} ");
     //        }
-            
+
     //    } ;
-       
+
 
     //}
 
@@ -114,7 +115,7 @@ using (SqlConnection c = new SqlConnection())
     //        YearResult = 20,
     //        SectionId = 1010
     //    };
-       
+
 
     //    string sqlFormattedDate = student.BirthDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
     //    //Console.WriteLine(sqlFormattedDate);
@@ -134,52 +135,116 @@ using (SqlConnection c = new SqlConnection())
     //            Console.WriteLine($"{insertedFirstName} {insertedLastName} a été inseré dans la table Student");
     //            Console.WriteLine($"L'id inseré est : {insertedId}");
     //        }
-           
+
     //    }
     //    c.Close();
     //}
 
 
+    //Console.WriteLine();
+    //Console.WriteLine("Ex 5 : Instanciez un objet de type « Student » contenant les informations de votre voisin(e), Insérez votre objet en base de données en utilisant les requêtes paramétrées");
+    //using (SqlCommand cmd = c.CreateCommand())
+    //{
+    //    Student student = new Student()
+    //    {
+    //        FirstName = "Corine",
+    //        LastName = "Latour",
+    //        BirthDate = new DateTime(1982, 8, 21),
+    //        YearResult = 15,
+    //        SectionId = 1010
+    //    };
+
+
+    //    string sqlFormattedDate = student.BirthDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+    //    //Console.WriteLine(sqlFormattedDate);
+    //    cmd.CommandText = $"INSERT INTO Student(FirstName, LastName, BirthDate, YearResult , SectionId ) output inserted.*  Values(@prenom,@nom,@anneeNaiss,@resultatAnnee,@sectionId) ";
+    //    cmd.Parameters.AddWithValue("prenom", student.FirstName);
+    //    cmd.Parameters.AddWithValue("nom", student.LastName);
+    //    cmd.Parameters.AddWithValue("anneeNaiss", sqlFormattedDate);
+    //    cmd.Parameters.AddWithValue("resultatAnnee", student.YearResult);
+    //    cmd.Parameters.AddWithValue("sectionId", student.SectionId);
+
+    //    c.Open();
+    //    //int rows = cmd.ExecuteNonQuery();
+    //    //int student.id = (int)cmd.ExecuteScalar();
+    //    //Console.WriteLine($"L'id inseré est : {id}");
+
+    //    using (SqlDataReader reader = cmd.ExecuteReader())
+    //    {
+    //        if (reader.Read())
+    //        {
+    //            int insertedId = (int)reader["Id"];
+    //            string insertedLastName = (string)reader["LastName"];
+    //            string insertedFirstName = (string)reader["FirstName"];
+    //            Console.WriteLine($"{insertedFirstName} {insertedLastName} a été inseré dans la table Student");
+    //            Console.WriteLine($"L'id inseré est : {insertedId}");
+    //        }
+
+    //    }
+    //    c.Close();
+    //}
+
+
+
+    //Console.WriteLine();
+    //Console.WriteLine("Ex 6 : Appelez la procédure pour changer de « Section » l’étudiant vous représentant");
+    //using (SqlCommand cmd = c.CreateCommand())
+    //{
+    //    cmd.CommandText = "SELECT Id,YearResult FROM Student WHERE FirstName = 'Benjamin' AND LastName = 'Sterckx'";
+    //    int id = 0;
+    //    int yearResult = 0;
+    //    c.Open();
+    //    using (SqlDataReader reader = cmd.ExecuteReader())
+    //    {
+    //        if (reader.Read())
+    //        {
+    //            id = (int)reader["Id"];
+    //            yearResult = (int)reader["YearResult"];
+    //        }
+
+    //    }
+
+    //    cmd.CommandText = "UpdateStudent";
+    //    cmd.CommandType = CommandType.StoredProcedure;
+    //    cmd.Parameters.AddWithValue("Id", id);
+    //    cmd.Parameters.AddWithValue("SectionId", 1010);
+    //    cmd.Parameters.AddWithValue("YearResult", yearResult);
+
+    //    cmd.ExecuteNonQuery();
+
+    //}
+
+
+
+    //Console.WriteLine();
+    //Console.WriteLine("Ex 7 :  Appelez la procédure pour supprimer votre voisin de la base de données,Vérifiez que le champs « Active » est bien passé à 0");
+    //using (SqlCommand cmd = c.CreateCommand())
+    //{
+
+    //    cmd.CommandText = "SELECT Id FROM Student WHERE FirstName = 'Corine' AND LastName = 'Latour'";
+    //    c.Open();
+    //    int id = (int)cmd.ExecuteScalar();
+
+    //    cmd.CommandText = "DeleteStudent";
+    //    cmd.CommandType = CommandType.StoredProcedure;
+    //    cmd.Parameters.AddWithValue("Id", id);
+    //    cmd.ExecuteNonQuery();
+
+    //}
+
     Console.WriteLine();
-    Console.WriteLine("Ex 5 : Instanciez un objet de type « Student » contenant les informations de votre voisin(e), Insérez votre objet en base de données en utilisant les requêtes paramétrées");
-    using (SqlCommand cmd = c.CreateCommand())
-    {
-        Student student = new Student()
-        {
-            FirstName = "Corine",
-            LastName = "Latour",
-            BirthDate = new DateTime(1982, 8, 21),
-            YearResult = 15,
-            SectionId = 1010
-        };
+    Console.WriteLine($"Ex8 : page 127");
+
+    Connexion connection = new Connexion(c.ConnectionString);
+    Command command = new Command($"INSERT INTO Student(FirstName, LastName, BirthDate, YearResult, SectionId) Values(@FirstName, @LastName, @BirthDate, @YearResult, @SectionId) ;",false);
+    command.AddParameter("FirstName", "Toto");
+    command.AddParameter("LastName", "Doe");
+    command.AddParameter("BirthDate", DateTime.Now);
+    command.AddParameter("YearResult", 1);
+    command.AddParameter("SectionId", 1010);
+
+    connection.ExecuteNonQuery(command);
 
 
-        string sqlFormattedDate = student.BirthDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
-        //Console.WriteLine(sqlFormattedDate);
-        cmd.CommandText = $"INSERT INTO Student(FirstName, LastName, BirthDate, YearResult , SectionId ) output inserted.*  Values(@prenom,@nom,@anneeNaiss,@resultatAnnee,@sectionId) ";
-        cmd.Parameters.AddWithValue("prenom", student.FirstName);
-        cmd.Parameters.AddWithValue("nom", student.LastName);
-        cmd.Parameters.AddWithValue("anneeNaiss", sqlFormattedDate);
-        cmd.Parameters.AddWithValue("resultatAnnee", student.YearResult);
-        cmd.Parameters.AddWithValue("sectionId", student.SectionId);
 
-        c.Open();
-        //int rows = cmd.ExecuteNonQuery();
-        //int student.id = (int)cmd.ExecuteScalar();
-        //Console.WriteLine($"L'id inseré est : {id}");
-
-        using (SqlDataReader reader = cmd.ExecuteReader())
-        {
-            if (reader.Read())
-            {
-                int insertedId = (int)reader["Id"];
-                string insertedLastName = (string)reader["LastName"];
-                string insertedFirstName = (string)reader["FirstName"];
-                Console.WriteLine($"{insertedFirstName} {insertedLastName} a été inseré dans la table Student");
-                Console.WriteLine($"L'id inseré est : {insertedId}");
-            }
-
-        }
-        c.Close();
-    }
 }
